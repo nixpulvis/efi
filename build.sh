@@ -52,8 +52,10 @@ mkdir -p $MOUNT
 sudo mount /dev/loop0p1 $MOUNT
 
 sudo bootctl install --path $MOUNT
+sudo cp hello.efi $MOUNT/EFI/
+sudo cp hello.conf $MOUNT/loader/entries/
+sudo cp loader.conf $MOUNT/loader/loader.conf
 
-exit
 # Clean up the mount, our image should be ready.
 sudo umount $MOUNT
 sudo losetup -d /dev/loop0
