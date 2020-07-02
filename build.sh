@@ -48,16 +48,17 @@ sudo losetup -P /dev/loop0 $TARGET
 sudo mkfs.vfat -F32 /dev/loop0p1
 
 # Create a mountpoint to mount the image through a loopback interface.
-mkdir -p $MOUNT
-sudo mount /dev/loop0p1 $MOUNT
+mkdir -p $MOUNT/
+sudo mount /dev/loop0p1 $MOUNT/
 
-sudo bootctl install --path $MOUNT
+sleep 1
+sudo bootctl install --path $MOUNT/
 sudo cp hello.efi $MOUNT/EFI/
 sudo cp hello.conf $MOUNT/loader/entries/
 sudo cp loader.conf $MOUNT/loader/loader.conf
 
 # Clean up the mount, our image should be ready.
-sudo umount $MOUNT
+sudo umount $MOUNT/
 sudo losetup -d /dev/loop0
-rm -r $MOUNT
+rm -r $MOUNT/
 
